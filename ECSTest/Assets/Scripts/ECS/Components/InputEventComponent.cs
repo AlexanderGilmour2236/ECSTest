@@ -4,7 +4,6 @@ namespace ECSTest
 {
     public struct InputEventComponent
     {
-        public Vector2 Direction;
-
+        public Vector2 MoveDirection;
     }
 }

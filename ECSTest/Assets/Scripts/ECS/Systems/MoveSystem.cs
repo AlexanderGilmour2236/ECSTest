@@ -15,11 +15,12 @@ namespace ECSTest
             foreach (int entity in filter)
             {
                 ref MovableComponent movableComponent = ref movablePool.Get(entity);
-                Vector2 direction = inputEventsPool.Get(entity).Direction;
-                movableComponent.Transform.Translate(new Vector3(direction.x, 0, direction.y) * (movableComponent.MoveSpeed * Time.deltaTime), 
-                    Space.World);
+                Vector2 direction = inputEventsPool.Get(entity).MoveDirection;
+                Vector3 movementDirection = new Vector3(direction.x, 0, direction.y) * (movableComponent.MoveSpeed * Time.deltaTime);
+                
+                movableComponent.Transform.Translate(movementDirection, Space.World);
                 movableComponent.IsMoving = direction.magnitude > 0;
-                movableComponent.CurrentMovementDirection = direction;
+                movableComponent.CurrentMovementDirection = movementDirection;
             }
         }
     }

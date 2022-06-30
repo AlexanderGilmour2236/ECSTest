@@ -5,6 +5,8 @@ namespace ECSTest
 {
     public class RotateMovablesSystem : IEcsRunSystem
     {
+        private const float ROTATION_LERP_SPEED = 0.3f;
+
         public void Run(EcsSystems systems)
         {
             EcsWorld world = systems.GetWorld();
@@ -17,8 +19,7 @@ namespace ECSTest
                 if (movableComponent.IsMoving)
                 {
                     movableComponent.Transform.localRotation = Quaternion.Lerp(movableComponent.Transform.localRotation, 
-                        Quaternion.LookRotation(new Vector3(movableComponent.CurrentMovementDirection.x,0,movableComponent.CurrentMovementDirection.y)),
-                        0.3f);
+                        Quaternion.LookRotation(movableComponent.CurrentMovementDirection), ROTATION_LERP_SPEED);
                 }
             }
         }

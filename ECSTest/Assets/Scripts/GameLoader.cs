@@ -13,7 +13,6 @@ namespace ECSTest
             _world = new EcsWorld();
             _ecsSystems = new EcsSystems(_world);
             _ecsSystems.Add(new GameInitSystem());
-            _ecsSystems.Add(new KeyboardInputSystem());
             _ecsSystems.Add(new PointToClickInputSystem());
             _ecsSystems.Add(new MoveSystem());
             _ecsSystems.Add(new CharacterAnimationSystem());

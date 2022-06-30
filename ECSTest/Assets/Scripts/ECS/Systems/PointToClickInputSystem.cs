@@ -44,7 +44,12 @@ namespace ECSTest
                 if (Mathf.Abs(distance) > MIN_DISTANCE_TO_POINT)
                 {
                     Vector3 movablePosition = movableComponentTransform.position;
-                    inputEventComponent.Direction = (_mouseClickPoint.Value - new Vector2(movablePosition.x, movablePosition.z)).normalized;
+                    inputEventComponent.MoveDirection = (_mouseClickPoint.Value - new Vector2(movablePosition.x, movablePosition.z)).normalized;
+                }
+                else
+                {
+                    _mouseClickPoint = null;
+                    inputEventComponent.MoveDirection = Vector2.zero;
                 }
             }
         }

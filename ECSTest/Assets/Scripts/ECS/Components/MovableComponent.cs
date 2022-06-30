@@ -7,7 +7,7 @@ namespace ECSTest
         public Transform Transform;
         public float MoveSpeed;
         public bool IsMoving;
-        public Vector2 CurrentMovementDirection;
+        public Vector3 CurrentMovementDirection;
     }
 }
 

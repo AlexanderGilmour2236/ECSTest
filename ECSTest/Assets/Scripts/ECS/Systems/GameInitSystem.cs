@@ -34,8 +34,6 @@ namespace ECSTest
             ref CharacterAnimationComponent characterAnimationComponent = ref characterAnimationsPool.Add(playerEntity);
             characterAnimationComponent.Animator = playerCharacter.Animator;
             characterAnimationComponent.WalkAnimationBoolName = playerCharacter.WalkAnimationBoolName;
-            
-            
         }
         
         private void InitLevelEntities()
