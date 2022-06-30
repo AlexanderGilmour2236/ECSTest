@@ -19,8 +19,8 @@ namespace ECSTest
             _ecsSystems.Add(new CharacterAnimationSystem());
             _ecsSystems.Add(new RotateMovablesSystem());
             
-            _ecsSystems.Add(new OpenDoorsSystem());
-            _ecsSystems.Add(new ButtonsSystem());
+            _ecsSystems.Add(new OpenCloseDoorsSystem());
+            _ecsSystems.Add(new HoldButtonsSystem());
             
             _ecsSystems.Init();
         }

@@ -1,14 +1,45 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Level
+namespace ECSTest
 {
     public class LevelButton : MonoBehaviour
     {
-        [SerializeField] private string _buttonId;
+        [SerializeField] private Transform _buttonTransform;
+        [SerializeField] private List<string> _buttonIds;
+        [SerializeField] private float _defaultYPosition;
+        [SerializeField] private float _pressedYPosition;
+        [SerializeField] private float _buttonRadius;
+        [SerializeField] private ButtonActionType _buttonActionType;
 
-        public string ButtonId
+        public List<string> ButtonIds
         {
-            get { return _buttonId; }
+            get { return _buttonIds; }
+        }
+        
+        public float DefaultYPosition
+        {
+            get { return _defaultYPosition; }
+        }
+
+        public float PressedYPosition
+        {
+            get { return _pressedYPosition; }
+        }
+        
+        public Transform ButtonTransform
+        {
+            get { return _buttonTransform; }
+        }
+        
+        public float ButtonRadius
+        {
+            get { return _buttonRadius; }
+        }
+        
+        public ButtonActionType ButtonActionType
+        {
+            get { return _buttonActionType; }
         }
     }
 }

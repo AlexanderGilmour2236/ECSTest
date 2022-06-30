@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Level
+namespace ECSTest
 {
     public class Door : MonoBehaviour
     {

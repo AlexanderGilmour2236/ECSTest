@@ -16,8 +16,8 @@ namespace ECSTest
                 ref MovableComponent movableComponent = ref movablesPool.Get(movableEntity);
                 if (movableComponent.IsMoving)
                 {
-                    movableComponent.Transform.localEulerAngles = Vector3.Lerp(movableComponent.Transform.localEulerAngles, 
-                        Quaternion.LookRotation(new Vector3(movableComponent.CurrentMovementDirection.x,0,movableComponent.CurrentMovementDirection.y)).eulerAngles,
+                    movableComponent.Transform.localRotation = Quaternion.Lerp(movableComponent.Transform.localRotation, 
+                        Quaternion.LookRotation(new Vector3(movableComponent.CurrentMovementDirection.x,0,movableComponent.CurrentMovementDirection.y)),
                         0.3f);
                 }
             }
