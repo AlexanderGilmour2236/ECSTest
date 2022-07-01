@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.ExtendedSystems;
 using UnityEngine;
 
 namespace ECSTest
@@ -15,9 +16,11 @@ namespace ECSTest
             _ecsSystems.Add(new InitPlayerSystem());
             _ecsSystems.Add(new LevelInitSystem());
             _ecsSystems.Add(new PointToClickInputSystem());
+            _ecsSystems.Add(new MoveToMouseClickSystem());
             _ecsSystems.Add(new MoveSystem());
             _ecsSystems.Add(new CharacterAnimationSystem());
             _ecsSystems.Add(new RotateMovablesSystem());
+            _ecsSystems.DelHere<MouseClickEventComponent>();
             
             _ecsSystems.Add(new OpenDoorsSystem());
             _ecsSystems.Add(new HoldButtonsSystem());
