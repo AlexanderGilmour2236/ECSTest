@@ -127,11 +127,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonTransform: {fileID: 7649844872066899981}
-  _buttonIds: []
+  _buttonId: 
   _defaultYPosition: 0
   _pressedYPosition: -0.167
-  _buttonRadius: 0.8
-  _buttonActionType: 0
+  _buttonRadius: 0.5
 --- !u!1 &7754366607076087328
 GameObject:
   m_ObjectHideFlags: 0

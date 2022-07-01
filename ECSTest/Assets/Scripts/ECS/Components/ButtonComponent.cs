@@ -7,8 +7,5 @@ namespace ECSTest
     {
         public string ButtonId;
         public bool IsPressed;
-        public float ButtonRadius;
-        public float DefaultYPosition;
-        public float PressedYPosition;
     }
 }

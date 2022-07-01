@@ -6,6 +6,7 @@ namespace ECSTest
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private string _walkAnimationBoolName;
+        [SerializeField] private float _radius;
 
         public Animator Animator
         {
@@ -15,6 +16,11 @@ namespace ECSTest
         public string WalkAnimationBoolName
         {
             get { return _walkAnimationBoolName; }
+        }
+        
+        public float Radius
+        {
+            get { return _radius; }
         }
     }
 }

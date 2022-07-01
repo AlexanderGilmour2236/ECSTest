@@ -31,6 +31,7 @@ namespace ECSTest
         {
             EcsPool<ButtonComponent> buttonComponentsPool = _world.GetPool<ButtonComponent>();
             EcsPool<ButtonAnimationComponent> buttonAnimationsPool = _world.GetPool<ButtonAnimationComponent>();
+            EcsPool<RadiusComponent> radiusesPool = _world.GetPool<RadiusComponent>();
 
             foreach (LevelButton levelButton in level.LevelButtons)
             {
@@ -39,13 +40,15 @@ namespace ECSTest
                 ref LocalPositionComponent buttonLocalPositionComponent = ref _localPositionsPool.Add(levelButtonEntity);
                 ref TransformComponent transformComponent = ref _transformsPool.Add(levelButtonEntity);
                 ref ButtonAnimationComponent buttonAnimationComponent = ref buttonAnimationsPool.Add(levelButtonEntity);
+                ref RadiusComponent radiusComponent = ref radiusesPool.Add(levelButtonEntity);
                 
                 buttonComponent.ButtonId = levelButton.ButtonId;
-                buttonComponent.DefaultYPosition = levelButton.DefaultYPosition;
-                buttonComponent.PressedYPosition = levelButton.PressedYPosition;
-                buttonComponent.ButtonRadius = levelButton.ButtonRadius;
+                radiusComponent.Radius = levelButton.ButtonRadius;
                 
                 buttonAnimationComponent.ButtonTransform = levelButton.ButtonTransform;
+                buttonAnimationComponent.DefaultYPosition = levelButton.DefaultYPosition;
+                buttonAnimationComponent.PressedYPosition = levelButton.PressedYPosition;
+                
                 transformComponent.Transform = levelButton.transform;
                 
                 buttonLocalPositionComponent.LocalPosition = transformComponent.Transform.localPosition;

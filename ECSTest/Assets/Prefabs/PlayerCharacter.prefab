@@ -451,6 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1654547689950236730}
   _walkAnimationBoolName: IsWalking
+  _radius: 0.5
 --- !u!136 &5855484605689871612
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -15,10 +15,11 @@ namespace ECSTest
             foreach (int buttonEntity in buttonsFilter)
             {
                 ButtonComponent buttonComponent = buttonsPool.Get(buttonEntity);
-                Transform buttonTransform = buttonsAnimationPool.Get(buttonEntity).ButtonTransform;
+                ref ButtonAnimationComponent buttonAnimationComponent = ref buttonsAnimationPool.Get(buttonEntity);
+                Transform buttonTransform = buttonAnimationComponent.ButtonTransform;
                 Vector3 buttonTransformLocalPosition = buttonTransform.localPosition;
                 
-                buttonTransformLocalPosition.y = buttonComponent.IsPressed ? buttonComponent.PressedYPosition : buttonComponent.DefaultYPosition;
+                buttonTransformLocalPosition.y = buttonComponent.IsPressed ? buttonAnimationComponent.PressedYPosition : buttonAnimationComponent.DefaultYPosition;
                 buttonTransform.localPosition = buttonTransformLocalPosition;
             }
             

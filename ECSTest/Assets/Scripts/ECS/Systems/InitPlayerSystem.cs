@@ -21,6 +21,7 @@ namespace ECSTest
             EcsPool<MovableComponent> movablesPool = _world.GetPool<MovableComponent>();
             EcsPool<InputEventComponent> inputEventsPool = _world.GetPool<InputEventComponent>();
             EcsPool<CharacterAnimationComponent> characterAnimationsPool = _world.GetPool<CharacterAnimationComponent>();
+            EcsPool<RadiusComponent> radiusesPool = _world.GetPool<RadiusComponent>();
             
             ref MovableComponent movableComponent = ref movablesPool.Add(playerEntity);
             inputEventsPool.Add(playerEntity);
@@ -35,6 +36,9 @@ namespace ECSTest
             ref CharacterAnimationComponent characterAnimationComponent = ref characterAnimationsPool.Add(playerEntity);
             characterAnimationComponent.Animator = playerCharacter.Animator;
             characterAnimationComponent.WalkAnimationBoolName = playerCharacter.WalkAnimationBoolName;
+
+            ref RadiusComponent radiusComponent = ref radiusesPool.Add(playerEntity);
+            radiusComponent.Radius = playerCharacter.Radius;
         }
     }
 }
