@@ -12,21 +12,25 @@ namespace ECSTest
         {
             _world = new EcsWorld();
             _ecsSystems = new EcsSystems(_world);
-            _ecsSystems.Add(new GameInitSystem());
+            _ecsSystems.Add(new InitPlayerSystem());
+            _ecsSystems.Add(new LevelInitSystem());
             _ecsSystems.Add(new PointToClickInputSystem());
             _ecsSystems.Add(new MoveSystem());
             _ecsSystems.Add(new CharacterAnimationSystem());
             _ecsSystems.Add(new RotateMovablesSystem());
             
-            _ecsSystems.Add(new OpenCloseDoorsSystem());
+            _ecsSystems.Add(new OpenDoorsSystem());
             _ecsSystems.Add(new HoldButtonsSystem());
+            _ecsSystems.Add(new ButtonAnimationSystem());
+            
+            _ecsSystems.Add(new LocalPositionUpdateSystem());
             
             _ecsSystems.Init();
         }
     
         void Update()
         {
-            _ecsSystems.Run();   
+            _ecsSystems.Run();
         }
     
         private void OnDestroy()

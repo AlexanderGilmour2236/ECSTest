@@ -3,39 +3,22 @@ using UnityEngine;
 
 namespace ECSTest
 {
-    public class GameInitSystem : IEcsInitSystem
+    public class LevelInitSystem : IEcsInitSystem
     {
         private EcsWorld _world = null;
+        private EcsPool<TransformComponent> _transformsPool;
+        private EcsPool<LocalPositionComponent> _localPositionsPool;
         
         public void Init(EcsSystems systems)
         {
             _world = systems.GetWorld();
-            InitPlayerEntity();
+
+            _transformsPool = _world.GetPool<TransformComponent>();
+            _localPositionsPool = _world.GetPool<LocalPositionComponent>();
+            
             InitLevelEntities();
         }
-        
-        private void InitPlayerEntity()
-        {
-            int playerEntity = _world.NewEntity();
-    
-            EcsPool<MovableComponent> movablesPool = _world.GetPool<MovableComponent>();
-            EcsPool<InputEventComponent> inputEventsPool = _world.GetPool<InputEventComponent>();
-            EcsPool<CharacterAnimationComponent> characterAnimationsPool = _world.GetPool<CharacterAnimationComponent>();
-            
-            ref MovableComponent movableComponent = ref movablesPool.Add(playerEntity);
-            inputEventsPool.Add(playerEntity);
-    
-            PlayerInitData playerInitData = PlayerInitData.LoadFromAssets();
-            Character playerCharacter = Object.Instantiate<Character>(playerInitData.PlayerCharacterPrefab);
-            
-            movableComponent.Transform = playerCharacter.transform;
-            movableComponent.MoveSpeed = playerInitData.DefaultMoveSpeed;
 
-            ref CharacterAnimationComponent characterAnimationComponent = ref characterAnimationsPool.Add(playerEntity);
-            characterAnimationComponent.Animator = playerCharacter.Animator;
-            characterAnimationComponent.WalkAnimationBoolName = playerCharacter.WalkAnimationBoolName;
-        }
-        
         private void InitLevelEntities()
         {
             LevelInitData levelInitData = LevelInitData.LoadFromResources();
@@ -47,18 +30,26 @@ namespace ECSTest
         private void InitButtons(Level level)
         {
             EcsPool<ButtonComponent> buttonComponentsPool = _world.GetPool<ButtonComponent>();
+            EcsPool<ButtonAnimationComponent> buttonAnimationsPool = _world.GetPool<ButtonAnimationComponent>();
 
             foreach (LevelButton levelButton in level.LevelButtons)
             {
                 int levelButtonEntity = _world.NewEntity();
                 ref ButtonComponent buttonComponent = ref buttonComponentsPool.Add(levelButtonEntity);
+                ref LocalPositionComponent buttonLocalPositionComponent = ref _localPositionsPool.Add(levelButtonEntity);
+                ref TransformComponent transformComponent = ref _transformsPool.Add(levelButtonEntity);
+                ref ButtonAnimationComponent buttonAnimationComponent = ref buttonAnimationsPool.Add(levelButtonEntity);
                 
-                buttonComponent.ButtonIds = levelButton.ButtonIds;
-                buttonComponent.ButtonTransform = levelButton.ButtonTransform;
+                buttonComponent.ButtonId = levelButton.ButtonId;
                 buttonComponent.DefaultYPosition = levelButton.DefaultYPosition;
                 buttonComponent.PressedYPosition = levelButton.PressedYPosition;
                 buttonComponent.ButtonRadius = levelButton.ButtonRadius;
-                buttonComponent.ButtonActionType = levelButton.ButtonActionType;
+                
+                buttonAnimationComponent.ButtonTransform = levelButton.ButtonTransform;
+                transformComponent.Transform = levelButton.transform;
+                
+                buttonLocalPositionComponent.LocalPosition = transformComponent.Transform.localPosition;
+                buttonLocalPositionComponent.LocalRotation = transformComponent.Transform.localRotation;
             }   
         }
 
@@ -70,13 +61,18 @@ namespace ECSTest
             {
                 int doorEntity = _world.NewEntity();
                 ref DoorComponent doorComponent = ref doorComponentsPool.Add(doorEntity);
+                ref LocalPositionComponent localPositionComponent = ref _localPositionsPool.Add(doorEntity);
+                ref TransformComponent transformComponent = ref _transformsPool.Add(doorEntity);
                 
                 doorComponent.DoorId = levelDoor.DoorId;
-                doorComponent.DoorTransform = levelDoor.DoorTransform;
                 doorComponent.OpenCloseSpeed = levelDoor.OpenCloseSpeed;
                 
                 doorComponent.OpenDoorYPosition = levelDoor.OpenedYPosition;
                 doorComponent.ClosedDoorYPosition = levelDoor.ClosedYPosition;
+                
+                localPositionComponent.LocalPosition = levelDoor.DoorTransform.localPosition;
+                
+                transformComponent.Transform = levelDoor.DoorTransform;
             }
         }
     }

@@ -6,15 +6,14 @@ namespace ECSTest
     public class LevelButton : MonoBehaviour
     {
         [SerializeField] private Transform _buttonTransform;
-        [SerializeField] private List<string> _buttonIds;
+        [SerializeField] private string _buttonId;
         [SerializeField] private float _defaultYPosition;
         [SerializeField] private float _pressedYPosition;
         [SerializeField] private float _buttonRadius;
-        [SerializeField] private ButtonActionType _buttonActionType;
 
-        public List<string> ButtonIds
+        public string ButtonId
         {
-            get { return _buttonIds; }
+            get { return _buttonId; }
         }
         
         public float DefaultYPosition
@@ -37,9 +36,5 @@ namespace ECSTest
             get { return _buttonRadius; }
         }
         
-        public ButtonActionType ButtonActionType
-        {
-            get { return _buttonActionType; }
-        }
     }
 }
